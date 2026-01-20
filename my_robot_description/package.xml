@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>my_robot_description</name>
+  <version>0.0.0</version>
+  <description>RTABMap integration with fused point clouds</description>
+  <maintainer email="your.email@example.com">Your Name</maintainer>
+  <license>Apache-2.0</license>
+
+  <!-- Build dependencies -->
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_sensor_msgs</depend>
+  <depend>laser_geometry</depend>
+  <depend>cv_bridge</depend>
+  <depend>sensor_msgs_py</depend>
+  
+  <!-- RTABMap dependencies -->
+  <depend>rtabmap_slam</depend>
+  <depend>rtabmap_sync</depend>
+  <depend>rtabmap_viz</depend>
+  <depend>rtabmap_util</depend>
+  
+  <!-- Optional visualization dependencies -->
+  <depend>rviz2</depend>
+  
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

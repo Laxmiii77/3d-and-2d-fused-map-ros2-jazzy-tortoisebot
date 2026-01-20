@@ -1,0 +1,67 @@
+rtabmap:
+  ros__parameters:
+    # Frames
+    frame_id: "base_link"
+    odom_frame_id: "odom"
+    map_frame_id: "map"
+
+    # Input sources (LiDAR only)
+    subscribe_scan_cloud: true
+    subscribe_scan: false
+    subscribe_depth: false
+    subscribe_rgb: false
+    subscribe_rgbd: false
+    subscribe_odom_info: false
+
+    # Sync
+    approx_sync: true
+    queue_size: 30
+
+    # SLAM settings
+    Mem/IncrementalMemory: true
+    Mem/InitWMWithAllNodes: false
+
+    # Registration (ICP for 2D lidar pointclouds)
+    Reg/Strategy: 1              # ICP
+    Reg/Force3DoF: true          # 2D SLAM
+
+    # ICP tuning
+    Icp/VoxelSize: 0.05
+    Icp/MaxCorrespondenceDistance: 0.15
+    Icp/MaxIterations: 30
+    Icp/Epsilon: 0.001
+    Icp/CorrespondenceRatio: 0.4
+    Icp/RangeMin: 0.1
+    Icp/RangeMax: 12.0
+    Icp/PointToPlane: false
+
+    # Map update thresholds
+    RGBD/AngularUpdate: 0.1
+    RGBD/LinearUpdate: 0.1
+
+    # Occupancy grid (2D/3D)
+    Grid/3D: true
+    Grid/MaxObstacleHeight: 3.0
+    Grid/MaxGroundHeight: 0.2
+    Grid/MinGroundHeight: -0.2
+    Grid/RayTracing: true
+
+    # Optimizer
+    Optimizer/Strategy: 1
+    Optimizer/Iterations: 20
+
+    # Memory
+    Mem/RehearsalSimilarity: 0.6
+    Mem/NotLinkedNodesKept: false
+    Mem/STMSize: 30
+
+    # Loop closure detection
+    Rtabmap/DetectionRate: 1.0
+
+    # Database
+    DbSqlite3/InMemory: false
+
+    # TF & timing
+    publish_tf: true
+    tf_delay: 0.05
+    wait_for_transform: 0.2

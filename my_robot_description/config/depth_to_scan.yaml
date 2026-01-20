@@ -1,0 +1,98 @@
+# OctoMap Server Parameters for ROS2 Jazzy
+# Use with: ros2 run octomap_server octomap_server_node --ros-args --params-file this_file.yaml
+
+octomap_server:
+  ros__parameters:
+    # Basic OctoMap Settings
+    resolution: 0.05
+    max_range: 5.0
+    min_range: 0.1
+    
+    # Frame IDs - Updated to match your TF tree
+    frame_id: "odom"              # Global frame (root of your TF tree)
+    base_frame_id: "base_link"    # Robot base frame (standard choice)
+    
+    # Input topic
+    cloud_in: "/depht_camera/points"
+    
+    # Probability settings
+    occupancy_threshold: 0.65
+    free_threshold: 0.12
+    prob_hit: 0.7
+    prob_miss: 0.4
+    clamping_threshold_min: 0.1192
+    clamping_threshold_max: 0.971
+    
+    # Tree management
+    tree_max_depth: 16
+    prune_tree: true
+    
+    # Map bounds (optional)
+    pointcloud_min_x: -10.0
+    pointcloud_max_x: 10.0
+    pointcloud_min_y: -10.0
+    pointcloud_max_y: 10.0
+    pointcloud_min_z: -2.0
+    pointcloud_max_z: 3.0
+    
+    # Point cloud filtering
+    filter_speckles: true
+    filter_ground: false
+    ground_filter_distance: 0.04
+    ground_filter_angle: 0.15
+    ground_filter_plane_distance: 0.07
+    
+    # Publishing settings
+    publish_2d_map: true
+    publish_free_space: false
+    map_publish_frequency: 0.2    # Reduced for better performance
+    
+    # Performance settings for queue full issue
+    sensor_model_max_range: 5.0
+    sensor_model_min_range: 0.1
+    
+    # Transform settings
+    transform_timeout: 1.0        # Increased timeout
+    
+    # Map file settings
+    map_file_path: ""
+    save_on_shutdown: false
+    
+    # Compression
+    compress_map: false
+    
+    # Incremental 2D projection
+    incremental_2d_projection: true
+    
+    # Color settings for visualization
+    color_mode: "height"          # Options: height, z, prob, fixed
+    color_r: 0.0
+    color_g: 0.0  
+    color_b: 1.0
+    color_a: 0.8
+    height_map: true
+    
+    # Latch topics (ROS2 equivalent of latching)
+    latch: true
+
+# Additional QoS and performance parameters
+qos_overrides:
+  /octomap_server:
+    cloud_in:
+      qos_profile:
+        history: keep_last
+        depth: 50                 # Increased queue depth
+        reliability: best_effort
+        durability: volatile
+    octomap_binary:
+      qos_profile:
+        history: keep_last
+        depth: 1
+        reliability: reliable
+        durability: transient_local  # For map persistence
+    projected_map:
+      qos_profile:
+        history: keep_last
+        depth: 1
+        reliability: reliable
+        durability: transient_local
